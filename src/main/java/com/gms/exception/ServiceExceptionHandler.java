@@ -2,6 +2,7 @@ package com.gms.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,5 +46,15 @@ public class ServiceExceptionHandler {
         logger.error("Unexpected exception occurred:", ex);
         return new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(), "Something went wrong, please check input values or contact app admin.");
+    }
+
+
+    @ExceptionHandler(value = AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public @ResponseBody
+    ErrorResponse handleAccessDeniedException(AccessDeniedException ex) {
+        logger.error("Not logged.", ex);
+        return new ErrorResponse(
+                HttpStatus.UNAUTHORIZED.value(), "Unauthorized.");
     }
 }
