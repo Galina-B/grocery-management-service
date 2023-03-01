@@ -6,11 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
 @SpringBootApplication
-public class GroceryManagementServiceApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GroceryManagementServiceApplication.class, args);
+		SpringApplication.run(Application.class, args);
 		logger.info("Grocery Management Service is running.");
 	}
-
 }
